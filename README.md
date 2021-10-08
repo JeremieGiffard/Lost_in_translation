@@ -11,6 +11,4 @@ Final project Intégrateur Développeur Web
  
  * ** files.html ** and ** files.phtml** templates files 
  
- 
- 
-# /!\ The books summary used are under free license. There is no copyright infringement.
+/!\ The books summary used are under free license. There is no copyright infringement.
