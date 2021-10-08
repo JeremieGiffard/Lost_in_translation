@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<?php include('../assets/templates/partials/head_section.html'); ?>
+
+<body class="few-content">
+	<!-- admin navbar -->
+	<?php require( '../assets/admin/partials/logged_navbar.html') ?>
+	<!-- //admin navbar -->
+	<main class="container">
+		<div class="content">
+			<header class="create_post_header">
+				<?php if ($isEditingPost === true): ?>
+				<h2 class="page-title">Edit Story</h2>
+				<?php else: ?>
+				<h2 class="page-title">Create New Story  </h2>
+				<?php endif ?>
+			</header>
+			<!-- Middle form - to create and edit  -->
+			<div>
+
+				<form method="post" enctype="multipart/form-data" action="../admin/functions/create_postTraitement.php" class="form-post">
+					<!-- validation errors for the form -->
+					<?php if ($messageNotification != ''): ?>
+					<div class="message error validation_errors" >
+					<p><?php echo htmlspecialchars($messageNotification); ?></p>
+					</div>
+					<?php endif; ?>
+
+					
+					<?php if ($isEditingPost === true): ?>
+					<input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?> ">
+					<?php endif ?>
+					<label for="title">title</label>
+					<input type="text" name="title" id="title" value="<?php echo htmlspecialchars($title); ?>" placeholder="Title">
+					<?php if ($isEditingPost === false): ?>
+					<label for="image">Featured image</label>
+					<input type="file" id="image" name="featured_image" >
+					<?php endif ?>
+					<textarea name="body" id="body" cols="30" rows="10" placeholder="Write your story"><?php echo htmlspecialchars($body); ?></textarea>
+						<?php if ($isEditingPost === false): ?>
+					<select name="topic_id" class="select_topic">
+						<option value="" selected disabled>Choose topic</option>
+						<?php foreach ($topics as $topic): ?>
+							<option value="<?php echo htmlspecialchars($topic['id']); ?>">
+								<?php echo htmlspecialchars($topic['name']); ?>
+							</option>
+					
+						<?php endforeach ?>
+					</select>	<?php endif ?>
+
+
+					<!-- if editing, display the UPDATE button-->
+					<?php if ($isEditingPost === true): ?>
+					<button type="submit" class="btn btn_create_post" name="update_post">UPDATE Story</button>
+					<?php else: ?>
+					<button type="submit" class="btn btn_create_post" name="create_post">Save Story</button>
+					<?php endif ?>
+					
+				</form>
+			
+			</div>
+		</div>
+	</main>
+	<!-- admin footer -->
+	<?php require( '../assets/templates/partials/footer.html'); ?>
+	<!-- //admin footer -->
+	<script src="../assets/js/main.js"></script>
+</body>
+
+</html>

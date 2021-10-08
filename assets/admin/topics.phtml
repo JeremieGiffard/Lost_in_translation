@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<?php require('../assets/templates/partials/head_section.html'); ?>
+
+
+
+<body class="few-content">
+	<!-- admin navbar -->
+	<?php require( '../assets/admin/partials/logged_navbar.html') ?>
+
+	<main class="container">
+		<!-- Left side menu -->
+		<div class="content">
+
+			<!-- Middle form - to create and edit -->
+			<section class="topic-action">
+				<form method="post" action="functions/topicsTraitement.php">
+					<fieldset>
+						<legend>Create/Edit Topics</legend>
+					<!-- validation errors for the form -->
+					<?php if ($messageNotification != ''): ?>
+					<div class="message error validation_errors" >
+					<p><?php echo htmlspecialchars($messageNotification); ?></p>
+					</div>
+					<?php endif; ?>
+		
+					<?php if ($isEditingTopic === true): ?>
+					
+					<input type="hidden" name="topic_id" id="topic" value="<?php echo htmlspecialchars($topic_id); ?>">
+					<?php endif ?>
+					<label for="topicname">topic name:</label>
+					<input type="text" name="topic_name" id="topicname" value="<?php echo htmlspecialchars($topic_name); ?>" placeholder="Topic">
+					<!-- if editing topic, display Update button -->
+					<?php if ($isEditingTopic === true): ?>
+					<button type="submit" class="btn" name="update_topic">Update</button>
+					<?php else: ?>
+					<button type="submit" class="btn" name="create_topic">Save</button>
+					<?php endif ?>
+					</fieldset>
+				</form>
+			</section>
+
+
+			
+			<section class="table-div">
+				
+				<?php if (empty($topics)): ?>
+				<h2>No topics yet</h2>
+				<?php else: ?>
+				<table>
+					<thead>
+						<th>N°</th>
+						<th>Topic Name</th>
+						<th>Edit Topic</th>
+						<th>Delete Topic</th>
+					</thead>
+					<tbody>
+						<?php foreach ($topics as $key => $topic): ?>
+						<tr>
+							<td>
+								<?php echo htmlspecialchars($key) + 1; ?>
+							</td>
+							<td>
+								<?php echo htmlspecialchars($topic['name']); ?>
+							</td>
+							<td>
+								<a class="fa fa-pencil btn edit" href="topics.php?edit-topic=<?php echo htmlspecialchars($topic['id']) ?>">
+								</a>
+							</td>
+							<td>
+								<a class="fa fa-trash btn delete" href="topics.php?delete-topic=<?php echo htmlspecialchars($topic['id']) ?>">
+								</a>
+							</td>
+						</tr>
+						<?php endforeach ?>
+					</tbody>
+				</table>
+				<?php endif ?>
+			</section>
+
+		</div>
+	</main>
+	<!-- Footer -->
+	 <?php require( '../assets/templates/partials/footer.html'); ?>
+	 <!-- //Footer -->
+	 <script src="../assets/js/main.js"></script>
+</body>
+
+</html>

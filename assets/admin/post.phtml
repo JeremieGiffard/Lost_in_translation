@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<?php include('../assets/templates/partials/head_section.html'); ?>
+
+
+
+<body class="few-content">
+	<!-- admin navbar -->
+	<?php require( '../assets/admin/partials/logged_navbar.html') ?>
+	<!-- //admin navbar -->
+	<main class="container">
+		<div class="content">
+			<div> <h2><?php echo htmlspecialchars($TotalStories) ?> stories on this site</h2></div>
+
+			
+			<section class="table-div">
+				<!-- Display notification message -->
+				<?php require('../assets/messages.php') ?>
+
+				<?php if (empty($posts)): ?>
+				<h2>You didn't write anything yet</h2>
+				<?php else: ?>
+				<table>
+					<thead>
+						<th>N</th>
+						<th>Author</th>
+						<th>Title</th>
+						<th><small>Edit</small></th>
+						<th><small>Delete</small></th>
+
+					</thead>
+					<tbody>
+						<?php foreach ($posts as $key => $post): ?>
+						<tr>
+							<td>
+								<?php echo htmlspecialchars($key) + 1; ?>
+							</td>
+							<td>
+								<a target="_blank" href="<?php echo  '../author_posts.php?author=' . htmlspecialchars($post['user_id']) ?>">
+								<?php echo htmlspecialchars($post['author']); ?>
+							</td>
+							<td>
+								<a target="_blank" href="<?php echo  '../single_post.php?post-slug=' . htmlspecialchars($post['slug']) ?>">
+									<?php echo htmlspecialchars($post['title']); ?>
+								</a>
+							</td>
+
+
+
+							<td>
+								<a class="fa fa-pencil btn edit" href="create_post.php?edit-post=<?php echo htmlspecialchars($post['id']) ?>">
+								</a>
+							</td>
+							<td>
+								<a class="fa fa-trash btn delete" href="create_post.php?delete-post=<?php echo htmlspecialchars($post['id']) ?>">
+								</a>
+							</td>
+						</tr>
+						<?php endforeach ?>
+					</tbody>
+				</table>
+				<?php endif ?>
+			</section>
+			
+		</div>
+	</main>
+	<?php require( '../assets/templates/partials/footer.html'); ?>
+	<script src="../assets/js/main.js"></script>
+</body>
+
+
+</html>

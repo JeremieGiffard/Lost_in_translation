@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+
+
+<?php include('../assets/templates/partials/head_section.html'); ?>
+
+
+<body class="few-content">
+    <!-- admin navbar -->
+    <?php require( '../assets/admin/partials/logged_navbar.html') ?>
+    <!-- //admin navbar -->
+    <main class="container">
+        <article class="content">
+
+            <div class="topic-action">
+                <h2 class="page-title">Welcome <?php echo htmlspecialchars($_SESSION['current_session']['user']['username']); ?>
+                </h2>
+
+            </div>
+            <div class="slider">
+                <img src="../assets/images/background/dashboard-bird.jpg" alt="slider fantasy img" class="slide">
+            </div>
+            <div>
+                <h3>Want to start your own story ? Need to update your personals informations ? You can acces all thoses services with the navbar !</h3>
+            </div>
+
+
+
+        </article>
+    </main>
+    <!-- admin footer -->
+    <?php require( '../assets/templates/partials/footer.html'); ?>
+    <!-- //admin footer -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+</body>
+
+
+</html>

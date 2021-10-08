@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<?php require('../assets/templates/partials/head_section.html'); ?>
+
+
+
+<body class="few-content">
+	<!-- admin navbar -->
+	<?php require( '../assets/admin/partials/logged_navbar.html') ?>
+	<!-- //admin navbar -->
+	<main class="container">
+		<div class="content">
+
+			<section class="user-action">
+
+				<form method="post" action="../admin/functions/usersTraitement.php" class="users-form">
+					<fieldset class="topic-action">
+					<legend>Edit User:
+					<?php echo htmlspecialchars($_SESSION['current_session']['user']['username']); ?></legend>
+					<!-- validation errors for the form -->
+					<?php if ($messageNotification != ''): ?>
+					<div class="message error validation_errors" >
+					<p><?php echo htmlspecialchars($messageNotification); ?></p>
+					</div>
+					<?php endif; ?>
+
+					<label for="username">username</label>
+					<input type="text" name="username" id="username" value="<?php echo htmlspecialchars($_SESSION['current_session']['user']['username']); ?>" placeholder="Username">
+					<label for="email">email</label>
+					<input type="email" name="email" id="email" value="<?php echo htmlspecialchars($_SESSION['current_session']['user']['email']); ?>" placeholder="Email">
+					<label for="password">password</label>
+					<input type="password" name="password" id="password" placeholder="Password">
+					<label for="password2">password confirmation</label>
+					<input type="password" name="password2" id="password2" placeholder="Password confirmation">
+					<button type="submit" class="btn" name="update_user">UPDATE</button>
+					<button type="submit" class="btn fa fa-trash" name="close_account"> DELETE YOUR ACCOUNT</button>
+					</fieldset>
+				</form>
+			</section>
+
+			<?php if ($_SESSION['current_session']['user']['role'] == "Admin"): ?>
+				<div>
+					<?php if ($_SESSION['current_session']['user']['role'] == "Admin" ): ?>
+					<h2>
+						<?php echo htmlspecialchars(getTotalNumber()); ?> users enregistés</h2>
+					<?php endif ?>
+				</div>
+				
+				<section class="table-div">
+	
+	
+	
+					<table>
+						<thead>
+							<th>N</th>
+							<th>Users</th>
+							<th>Role</th>
+							<th>delete</th>
+						</thead>
+						<tbody>
+							<?php foreach ($admins as $key => $admin): ?>
+							<tr>
+								<td>
+									<?php echo htmlspecialchars($key) + 1; ?>
+								</td>
+								<td>
+									<?php echo htmlspecialchars($admin['username']); ?>, &nbsp;
+									<?php echo htmlspecialchars($admin['email']); ?>
+								</td>
+								<td>
+									<?php echo htmlspecialchars($admin['role']); ?>
+								</td>
+	
+								<?php if (htmlspecialchars($admin['role'] == 'Author')): ?>
+								<td>
+									<a class="fa fa-trash btn delete" href="users.php?delete-admin=<?php echo htmlspecialchars($admin['id']); ?>">
+									</a>
+								</td>
+								<?php endif ?>
+							</tr>
+							<?php endforeach ?>
+						</tbody>
+					</table>
+					
+				</section>
+			<?php endif ?>
+		</div>
+	</main>
+	<!-- Footer -->
+	<?php require( '../assets/templates/partials/footer.html'); ?>
+	<!-- //Footer -->
+	<script src="../assets/js/main.js"></script>
+</body>
+
+
+</html>
