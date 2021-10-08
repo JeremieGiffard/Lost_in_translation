@@ -7,7 +7,7 @@ Final project Intégrateur Développeur Web
 
  * ** php files **  in ``root directory`` and ``admin directory`` -> recupere info dans database pour les afficher dans un phtml
  
- * ** php files **  in ``fonctions directory`` -> php fonctions appellées par formulaires (via <form  action="usersTraitement.php" > par exemple)
+ * ** php files **  in ``fonctions directory`` -> php fonctions appellées par formulaires (via form  action="usersTraitement.php"  par exemple)
  
  * ** files.html ** and ** files.phtml** templates files 
  
