@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<?php require('assets/templates/partials/head_section.html'); ?>
+
+<body>
+    <!-- Navbar -->
+    <?php require( 'assets/templates/partials/navbar.html'); ?>
+    <!-- // Navbar -->
+    <main class="container">
+
+
+        <section class="content">
+
+            <h2 class="content-title">
+                stories by <u><?php echo htmlspecialchars($result['username']); ?></u>
+            </h2>
+
+            <div>
+                <?php foreach ($posts as $post): ?>
+
+                <article class="post">
+                    <a class="post_wrap" href="single_post.php?post-slug=<?php echo htmlspecialchars($post['slug']); ?>">
+                        <img src="<?php echo 'assets/images/' .htmlspecialchars($post['image']); ?>" class="post_image" alt="story cover">
+                    </a>
+                    <div class="post_info">
+                        <h3>
+                            <a class="post_wrap" href="single_post.php?post-slug=<?php echo htmlspecialchars($post['slug']); ?>">
+                                <?php echo htmlspecialchars($post['title']); ?>
+                            </a>
+                        </h3>
+                        <span><a class="post_wrap" href="single_post.php?post-slug=<?php echo htmlspecialchars($post['slug']); ?>"><?php echo date("F j, Y ", strtotime(htmlspecialchars($post["created_at"]))); ?></a></span>
+                        <span class="read_more"><a class="post_wrap" href="single_post.php?post-slug=<?php echo htmlspecialchars($post['slug']); ?>">Read more...</a></span>
+                    </div>
+                    </a>
+                    <?php if (isset($post['topic']['name'])): ?>
+                    <!-- only if story have a topic -->
+                    <aside class="btn category">
+                        <a href="filtered_posts.php?topic=<?php echo htmlspecialchars($post['topic']['id']); ?>">
+                            <?php echo htmlspecialchars($post['topic']['name']); ?>
+                        </a>
+                    </aside>
+                    <!-- // only if story have a topic -->
+                    <?php endif ?>
+                </article>
+                <?php endforeach ?>
+
+            </div>
+        </section>
+
+    </main>
+    <!-- Footer -->
+    <?php require( 'assets/templates/partials/footer.html'); ?>
+    <!-- // Footer -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

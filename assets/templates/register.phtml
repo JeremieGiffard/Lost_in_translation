@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+    <html  lang="en-us">
+    <?php require('assets/templates/partials/head_section.html'); ?>
+
+
+    <body>
+        <!-- navbar -->
+        <?php require('assets/templates/partials/navbar.html'); ?>
+        <!-- // Navbar -->
+        <main class="container">
+            <div class="register">
+                <div class="login_div">
+                    
+                    <form action="functions/registerTraitement.php" method="post">
+                        <h2>Register</h2>
+                        <?php if ($messageNotification != ''): ?>
+                        <div class="form-error">
+                            <?php echo htmlspecialchars($messageNotification); ?>
+                        </div>
+                        <?php endif; ?>
+                        
+                        <div class="form-group">
+                            <label for="username">Username :</label>
+                            <input type="text" name="username" id="username" min="4" class="form-control" required>
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <label for="email">Email :</label>
+                            <input type="email" name="email" id="email" class="form-control" required>
+                            
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password :</label>
+                            <input type="password" name="password" id="password" class="form-control" required>
+                            
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn">Register</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </main>
+         <!-- Footer -->
+        <?php require( 'assets/templates/partials/footer.html'); ?>
+        <!-- // Footer -->
+        <script src="assets/js/main.js"></script>
+    </body>
+    </html>

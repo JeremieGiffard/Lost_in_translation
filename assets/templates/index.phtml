@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<?php require('assets/templates/partials/head_section.html'); ?>
+
+<body>
+    <!-- navbar -->
+    <?php require('partials/navbar.html'); ?>
+    <!-- // navbar -->
+
+    <main class="container">
+
+
+        <section class="banner">
+            <article class="welcome_msg">
+                <h2>Write your own story !</h2>
+                <a href="register.php" class="btn">Join us!</a>
+            </article>
+            <article class="login_div">
+                <form action="functions/loginTraitement.php" method="post">
+                    <fieldset>
+                        <legend>Login</legend>
+                        <!-- error notification -->
+                        <?php if ($messageNotification != ''): ?>
+                        <aside class="message error validation_errors">
+                            <p>
+                                <?php echo htmlspecialchars($messageNotification); ?>
+                            </p>
+                        </aside>
+                        <?php endif; ?>
+                        <!-- //error notification -->
+                        
+                        <label for="email">email <input type="email" name="email" id="email" placeholder="Email@exemple" required></label>
+                        <label for="password">password</label>
+                        <input type="password" name="password" placeholder="Password" id="password" required>
+                        <button class="btn" type="submit" name="login_btn">Login</button>
+                    </fieldset>
+                </form>
+            </article>
+        </section>
+
+
+
+        <section class="content">
+            <h2 class="content-title">Latest Updates</h2>
+
+            <div>
+                <?php foreach ($posts as $post): ?>
+
+                <article class="post">
+                    <a class="post_wrap" href="single_post.php?post-slug=<?php echo htmlspecialchars($post['slug']); ?>">
+                            <img src="<?php echo 'assets/images/' .htmlspecialchars($post['image']); ?>" class="post_image" alt="story cover">
+                    </a>
+                    <div class="post_info">
+                        <h3>
+                            <a class="post_wrap" href="single_post.php?post-slug=<?php echo htmlspecialchars($post['slug']); ?>">
+                                <?php echo htmlspecialchars($post['title']); ?>
+                            </a>
+                        </h3>
+                        <div class="info">
+                            <span><a class="post_wrap" href="single_post.php?post-slug=<?php echo htmlspecialchars($post['slug']); ?>"><?php echo date("F j, Y ", strtotime(htmlspecialchars($post["created_at"]))); ?></a></span>
+                            <span class="read_more"><a class="post_wrap" href="single_post.php?post-slug=<?php echo htmlspecialchars($post['slug']); ?>">Read more...</a></span>
+                        </div>
+                    </div>
+                    </a>
+                    <?php if (isset($post['topic']['name'])): ?>
+                    <!-- only if story have a topic -->
+                    <aside class="btn category">
+                        <a href="filtered_posts.php?topic=<?php echo htmlspecialchars($post['topic']['id']); ?>">
+                            <?php echo htmlspecialchars($post['topic']['name']); ?>
+                        </a>
+                    </aside>
+                    <!-- // only if story have a topic -->
+                    <?php endif ?>
+
+                </article>
+
+                <?php endforeach ?>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <?php require( 'assets/templates/partials/footer.html'); ?>
+    <!-- // Footer -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

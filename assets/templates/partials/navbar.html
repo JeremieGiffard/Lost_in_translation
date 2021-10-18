@@ -1,0 +1,24 @@
+
+<header>
+    <nav class="navbar" id="myTopnav">
+        <a href="index.php">
+            <h1>Lost in translation</h1>
+        </a>
+        <?php foreach ($topics as $topic): ?>
+        <a href="<?php echo 'filtered_posts.php?topic=' . htmlspecialchars($topic['id']) ?>">
+            <?php echo $topic['name']; ?>
+        </a>
+        <?php endforeach ?>
+        <?php if (!isset($_SESSION['current_session'])): ?>
+        <a href="register.php">Join-us!</a>
+        <?php endif ?>
+        <?php if (isset($_SESSION['current_session'])): ?>
+        <a href="admin/dashboard.php">Dashboard</a>
+        <a href="functions/logout.php">Log Out</a>
+        <?php endif ?>
+
+        <a href="#" class="icon">
+			<i class="fa fa-bars"></i>
+		</a>
+    </nav>
+</header>
